@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.OnClick;
+import butterknife.ButterKnife;
 
 final public class RecyclerActivity extends AppCompatActivity implements RecyclerActivityInterface {
 
@@ -24,14 +24,14 @@ final public class RecyclerActivity extends AppCompatActivity implements Recycle
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.recycler_activity);
-		initAdapter();
+		iniUi();
 		presenter.onCreate();
 	}
 
-	@OnClick (R.id.swapItemsBtn)
-	void onSwapItemsBtnClicked() {
-		presenter.onSwapItemsBtnClicked();
+	private void iniUi() {
+		setContentView(R.layout.recycler_activity);
+		ButterKnife.bind(this);
+		initAdapter();
 	}
 
 	private void initAdapter() {
@@ -55,6 +55,11 @@ final public class RecyclerActivity extends AppCompatActivity implements Recycle
 	@Override
 	public List<Task> getRecyclerData() {
 		return adapter.getData();
+	}
+
+	@Override
+	public void updateListWithAnimation(final List<Task> sortedTasks, final int indexInitial, final int indexSorted) {
+		adapter.notifyItemMoved(sortedTasks, indexInitial, indexSorted);
 	}
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,14 @@ final class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(final ViewHolder holder, final int position) {
-		final Task d = data.get(position);
+		final Task task = data.get(position);
 
-		setCheckBoxListener(holder, d);
+		Log.i("Eg:TasksAdapter:52", "onBindViewHolder task " + task);
 
-		holder.checkbox.setChecked(d.isComplete);
-		holder.title.setText(d.title);
+		setCheckBoxListener(holder, task);
+
+		holder.checkbox.setChecked(task.isComplete);
+		holder.title.setText(task.title);
 	}
 
 	private void setCheckBoxListener(final ViewHolder holder, final Task d) {
@@ -76,16 +79,25 @@ final class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> {
 	 * @param data data to show in list
 	 */
 	public void setData(@Nullable List<Task> data) {
+		setDataInternal(data);
+		notifyDataSetChanged();
+	}
+
+	private void setDataInternal(final @Nullable List<Task> data) {
 		if (data == null) {
 			this.data.clear();
 		} else {
 			this.data = data;
 		}
-		notifyDataSetChanged();
 	}
 
 	public List<Task> getData() {
 		return data;
+	}
+
+	public void notifyItemMoved(final List<Task> sortedTasks, final int indexInitial, final int indexSorted) {
+		setDataInternal(sortedTasks);
+		notifyItemMoved(indexInitial, indexSorted);
 	}
 
 	class ViewHolder extends RecyclerView.ViewHolder {
