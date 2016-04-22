@@ -1,7 +1,6 @@
 package recyclerview;
 
 import java.util.ArrayList;
-import java.util.List;
 
 final class RecyclerActivityPresenter {
 
@@ -25,37 +24,6 @@ final class RecyclerActivityPresenter {
 		view.showRecycler(tasks);
 	}
 
-	public void onTaskChecked(final int taskId, final boolean isChecked) {
-		List<Task> unsortedInitialTasks = view.getRecyclerData();
-
-		int indexInitial = getIndex(unsortedInitialTasks, taskId);
-		List<Task> unsortedAmendedForCheckedTasks = setChecked(unsortedInitialTasks, taskId, isChecked);
-		List<Task> sortedTasks = new Sorter().sortByCompleted(unsortedAmendedForCheckedTasks);
-		int indexSorted = getIndex(sortedTasks, taskId);
-
-		view.updateListWithAnimation(sortedTasks, indexInitial, indexSorted);
-	}
-
-	private int getIndex(final List<Task> tasks, final int taskId) {
-		for (int i = 0; i < tasks.size(); i++) {
-			if (tasks.get(i).id == taskId) {
-				return i;
-			}
-		}
-		throw new IllegalArgumentException("index not found taskId " + taskId);
-	}
-
-	private List<Task> setChecked(final List<Task> tasks, final int taskId, final boolean isChecked) {
-
-		List<Task> amendedTasks = new ArrayList<>(tasks);
-		for (final Task task : amendedTasks) {
-			if (task.id == taskId) {
-				task.isComplete = isChecked;
-
-			}
-		}
-		return amendedTasks;
-	}
 
 	public void onUpdateBtnClicked(final String input) {
 		Task task = new Task(1, input, false);

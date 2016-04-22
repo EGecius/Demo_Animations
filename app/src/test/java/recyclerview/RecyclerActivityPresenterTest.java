@@ -11,9 +11,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -45,16 +42,6 @@ public class RecyclerActivityPresenterTest {
 
 	@Test
 	public void when__then() {
-
-		//WHEN
-		presenter.onTaskChecked( /*taskId*/ 3, true);
-
-		//THEN
-		verify(view).updateListWithAnimation(captor.capture(), eq(2), eq(0));
-		List<Task> list = captor.getValue();
-		assertThat(list.get(0).isComplete).isTrue();
-		assertThat(list.get(1).isComplete).isFalse();
-		assertThat(list.get(2).isComplete).isFalse();
 	}
 
 }

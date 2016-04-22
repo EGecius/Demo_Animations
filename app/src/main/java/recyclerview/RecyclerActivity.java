@@ -20,7 +20,7 @@ final public class RecyclerActivity extends AppCompatActivity implements Recycle
 
 	RecyclerActivityPresenter presenter = new RecyclerActivityPresenter(this);
 
-	@Bind(R.id.editText) EditText editText;
+	@Bind (R.id.editText) EditText editText;
 	@Bind (R.id.recycler) RecyclerView recycler;
 	private TasksAdapter adapter;
 
@@ -39,12 +39,7 @@ final public class RecyclerActivity extends AppCompatActivity implements Recycle
 
 	private void initAdapter() {
 		Context ctx = getApplicationContext();
-		adapter = new TasksAdapter(ctx, new TasksAdapter.Listener() {
-			@Override
-			public void onChecked(final int taskId, final boolean isChecked) {
-				presenter.onTaskChecked(taskId, isChecked);
-			}
-		});
+		adapter = new TasksAdapter(ctx);
 		recycler.setLayoutManager(new LinearLayoutManager(ctx));
 		recycler.setNestedScrollingEnabled(true);
 		recycler.setAdapter(adapter);
