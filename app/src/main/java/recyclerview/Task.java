@@ -1,6 +1,8 @@
 package recyclerview;
 
-final class Task {
+import android.support.annotation.NonNull;
+
+final class Task implements Comparable<Task> {
 
 	final int id;
 	final String title;
@@ -10,5 +12,22 @@ final class Task {
 		this.id = id;
 		this.title = title;
 		this.isComplete = isComplete;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	@Override
+	public int compareTo(@NonNull final Task another) {
+
+		if (isComplete && !another.isComplete) {
+			return 1;
+		} else if (!isComplete && another.isComplete) {
+			return -1;
+		}
+
+		return 0;
 	}
 }

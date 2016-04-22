@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import java.util.List;
 
 /** Swaps data in {@link TasksAdapter} when items get checked/unchecked */
+// TODO: 22/04/2016 generify this
 final class TasksAdapterSwapper {
 
 	interface Callback {
