@@ -100,6 +100,16 @@ final class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> {
 		notifyItemMoved(indexInitial, indexSorted);
 	}
 
+	public void updateTask(final Task task) {
+		for (int i = 0; i < data.size(); i++) {
+			if (data.get(i).id == task.id) {
+				data.set(i, task);
+				notifyItemChanged(i);
+				return;
+			}
+		}
+	}
+
 	class ViewHolder extends RecyclerView.ViewHolder {
 
 		@Bind (R.id.checkbox) CheckBox checkbox;

@@ -57,4 +57,9 @@ final class RecyclerActivityPresenter {
 		return amendedTasks;
 	}
 
+	public void onUpdateBtnClicked(final String input) {
+		Task task = new Task(1, input, false);
+		view.updateList(task);
+	}
+
 }

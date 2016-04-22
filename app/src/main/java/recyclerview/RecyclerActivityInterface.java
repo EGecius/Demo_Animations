@@ -10,4 +10,6 @@ interface RecyclerActivityInterface {
 	List<Task> getRecyclerData();
 
 	void updateListWithAnimation(final List<Task> sortedTasks, final int indexInitial, final int indexSorted);
+
+	void updateList(Task task);
 }
