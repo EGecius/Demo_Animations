@@ -17,10 +17,6 @@ final class TasksAdapterSwapper {
 		void swap(final List<Task> sortedTasks, final Integer from, final Integer to);
 	}
 
-
-	public TasksAdapterSwapper() {
-	}
-
 	public void onCheckedChanged(List<Task> data, final Callback callback) {
 
 		Integer lastCompleteIndex = getLastCompleteIndex(data);
@@ -33,7 +29,6 @@ final class TasksAdapterSwapper {
 			//noinspection UnusedAssignment
 			data = sortedTasks;
 			callback.swap(sortedTasks, lastCompleteIndex, firstNotCompleteIndex);
-//			tasksAdapter.notifyItemMoved(lastCompleteIndex, firstNotCompleteIndex);
 		}
 	}
 
